@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Chat = (socket, username, room) => {
   const [currentMessage, setCurrentMessage] = useState();
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
         room: room,
