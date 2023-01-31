@@ -9,16 +9,20 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3002",
     method: ["GET", "POST"],
   },
 });
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
-
+  console.log(`User Connected: ${socket.id}`);
+  
+  socket.on("join_room", (data) => {
+    socket.join(data)
+    console.log(`User with id ${socket.id} join room ${data}`)
+  })
   socket.on("disconnected", () => {
-    console.console.log("Disconnected:", socket.id);
+    console.console.log(`User Disconnected: ${socket.id}`);
   });
 });
 
